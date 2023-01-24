@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def vig_on_moneyline_split(odds1, odds2):
@@ -27,3 +28,4 @@ def vig_on_moneyline_split(odds1, odds2):
         imp_prob_list.append(implied_prob)
 
     return sum(imp_prob_list) - 1
+
