@@ -21,7 +21,7 @@ def plot_vig(df, plot_function):
     Z = np.ndarray(shape=(m, n))
     for i, odds1 in enumerate(odds1_arr):
         for j, odds2 in enumerate(odds2_arr):
-            Z[i][j] = abs(vig_on_moneyline_split(odds1, odds2))
+            Z[i][j] = abs(vig([odds1, odds2]))
 
     X, Y = np.meshgrid(odds1_arr, odds2_arr)
     plot_function(X, Y, Z)
@@ -70,7 +70,6 @@ def plot_surface(X, Y, Z):
     ax.zaxis.set_major_formatter('{x:.02f}')
     # Add a color bar which maps values to colors.
     fig.colorbar(surf, shrink=0.5, aspect=5)
-
     plt.show()
 
 
@@ -106,4 +105,4 @@ def plot_surface_with_projected_filled_contours(X, Y, Z):
 if __name__ == "__main__":
     df = pd.DataFrame(
         {'odds1': np.arange(-500, -100), 'odds2': np.arange(100, 500)})
-    print(plot_vig(df, plot_function=plot_surface))
+    plot_vig(df, plot_function=plot_surface)
