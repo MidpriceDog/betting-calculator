@@ -2,6 +2,35 @@ from fractions import Fraction
 from decimal import Decimal
 
 
+def odds_to_implied_probability(odds, odds_type='american'):
+    """Converts odds to implied probability. Default type is 'american'
+
+    Parameters
+    ----------
+    odds : float or Fraction
+        Value of american, decimal, or fractional odds
+
+    odds_type : str
+        Can be 'american', 'decimal', or 'fractional'
+
+    Returns
+    -------
+    float
+        Returns the implied probability of the provided odds
+    """
+    if odds_type == 'fractional':
+        odds = fractional_to_american(odds)
+    elif odds_type == 'decimal':
+        odds = decimal_to_american(odds)
+
+    if odds > 0:
+        # uses formula 1-p/p = odds/100
+        implied_prob = 100/(100+odds)
+    else:
+        implied_prob = abs(odds)/((abs(odds) + 100))
+    return implied_prob
+
+
 def decimal_to_american(decimal_odds):
     """Converts decimal odds to American odds.
 
@@ -129,3 +158,7 @@ def fractional_to_decimal(fractional_odds):
     numerator, denominator = fractional_odds.numerator, fractional_odds.denominator
     decimal_odds = 1 + numerator*1.0/denominator
     return decimal_odds
+
+
+if __name__ == "__main__":
+    print(american_to_decimal(500))
