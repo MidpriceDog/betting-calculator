@@ -1,5 +1,6 @@
 from fractions import Fraction
 from decimal import Decimal
+import numpy as np
 
 
 def odds_to_implied_probability(odds, odds_type='american'):
@@ -33,17 +34,17 @@ def odds_to_implied_probability(odds, odds_type='american'):
 
 def decimal_to_american(decimal_odds):
     """Converts decimal odds to American odds.
-
     Examples:
       1.25 -> -400
       2.4 -> 140
       10 -> 900
-
     Parameters
     ----------
     decimal_odds : float
         Decimal representation of the odds
     """
+    if decimal_odds == 1:
+        return -np.inf
     if decimal_odds < 2:
         american_odds = -100/(decimal_odds - 1)
     else:
@@ -53,17 +54,14 @@ def decimal_to_american(decimal_odds):
 
 def american_to_decimal(american_odds):
     """Convert American odds to decimal (European odds)
-
     Examples:
       400 -> 5.0
       -100 -> 2.0
       -760 -> 1.13
-
     Parameters
     ----------
     american_odds : int
         American representation of the odds
-
     Returns
     -------
     float
@@ -161,4 +159,5 @@ def fractional_to_decimal(fractional_odds):
 
 
 if __name__ == "__main__":
-    print(american_to_decimal(500))
+    print(decimal_to_american(2.4))
+    print(decimal_to_american(1.61))

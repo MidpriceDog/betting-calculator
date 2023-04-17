@@ -31,3 +31,7 @@ def implied_probability(odds):
         implied_prob = abs(odds)/((abs(odds) + 100))
     return implied_prob
 
+
+def odds(implied_prob):
+    p = implied_prob
+    return 100*(1-p)/p
