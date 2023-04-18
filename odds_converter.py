@@ -3,52 +3,6 @@ from decimal import Decimal
 import numpy as np
 
 
-def is_american(odds):
-    """Checks if odds are American
-
-    Parameters
-    ----------
-    odds : float or Fraction
-        Value of american, decimal, or fractional odds
-
-    Returns
-    -------
-    bool
-        Returns True if odds are American, False otherwise
-    """
-    if isinstance(odds, Fraction):
-        return False
-    # Convert string to float
-    odds = float(odds)
-    elif abs(odds) >= 100:
-        return True
-    else:
-        return False
-
-
-def is_decimal(odds):
-    """Checks if odds are decimal
-
-    Parameters
-    ----------
-    odds : float or Fraction
-        Value of american, decimal, or fractional odds
-
-    Returns
-    -------
-    bool
-        Returns True if odds are decimal, False otherwise
-    """
-    if isinstance(odds, Fraction):
-        return False
-    # Convert string to float
-    odds = float(odds)
-    elif odds < 100 and odds > 0:
-        return True
-    else:
-        return False
-
-
 def odds_to_implied_probability(odds, odds_type='american'):
     """Converts odds to implied probability. Default type is 'american'
 
